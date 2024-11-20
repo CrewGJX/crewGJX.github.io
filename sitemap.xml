@@ -2,10 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://crewgjx.github.io/about/</loc>
+    <lastmod>2024-11-20T15:41:22+08:00</lastmod>
+  </url><url>
+    <loc>http://crewgjx.github.io/</loc>
+    <lastmod>2024-11-20T15:41:22+08:00</lastmod>
+  </url><url>
     <loc>http://crewgjx.github.io/categories/</loc>
   </url><url>
     <loc>http://crewgjx.github.io/tags/</loc>
-  </url><url>
-    <loc>http://crewgjx.github.io/</loc>
   </url>
 </urlset>
