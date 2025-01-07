@@ -147,10 +147,28 @@ NPM-网络流量管理 trial版可以检测流量。 Monitor-告警管理 选择
   <footer class="entry-footer"></footer>
   <a class="entry-link" aria-label="post link to " href="http://crewgjx.github.io/pages/data-dog/"></a>
 </article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>nginx代理udp 起源 由于集群环境迁移，原集群中用于处理南向心跳报文的服务，需要迁移至新集群中。 但是由于南向网络无法与新集群连通，而原集群的网络与南向和新集群都可以打通。考虑在原集群中部署nginx服务，代理udp心跳报文至新集群。
+服务部署 方案1.0 在原集群中部署一个
+user nginx; worker_rlimit_nofile 65535; worker_processes auto; error_log /var/log/nginx/error.log notice; pid /var/run/nginx.pid; events { worker_connections 1024; } stream { log_format main &#39;$remote_addr -&gt; $upstream_addr =&gt; [$time_local] - $status&#39;; upstream forward { server 1.1.1.1:8080; } server { listen 8080 udp; access_log /var/log/forward.log main; proxy_pass forward; } } 排障 定位问题 刚开始服务运行正常。能正常代理UDP请求，且新集群的服务返回的udp报文也能正常传输到南向。 一段时间后，观测到sink，也即下游数据出现异常，推测可能是该心跳服务异常，故开始溯源日志。 溯源日志后发现nginx服务日志出现error，连接过多导致无法建立新的连接。
+扩容处理 增加connection数量至10240且将deployment扩容至10后仍无法解决问题，一段时间后继续出现。
+方案2.0 由于观察到日志中，udp报文的数量相较于实际，明显偏小。 考虑是否因为无连接，导致没有结束，无法记录日志。 在搜索后，发现可以添加proxy_responses 0，让nginx直接记录日志。 在更改配置文件后，发现问题更严重了。 原本是正常一段时间后，再出现问题。配置变更后，服务无法再正常运行。 南向上报的心跳报文可以记录到所有的转发，但是回程给南向的udp，无法观察到回程信息。
+再排障 后经多次上网搜索，发现proxy_responses此字段，其实是nginx为udp代理做的虚拟会话设置。 当proxy_responses为默认值时，nginx为一个udp保留虚拟会话，因此，出现1.0时的连接无法释放，导致服务正常运行一段时间后，nginx代理会down。 当proxy_responses设置为0时，nginx会认为此虚拟会话无需保留，所以当回程udp报文再次回来时，nginx已经释放掉之前的虚拟会话，也就无法回程转发。
+...</p>
+  </div>
+  <footer class="entry-footer"></footer>
+  <a class="entry-link" aria-label="post link to " href="http://crewgjx.github.io/pages/nginx/nginx%E4%BB%A3%E7%90%86udp/"></a>
+</article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="http://crewgjx.github.io/">随便写写</a></span> · 
+        <span>&copy; 2025 <a href="http://crewgjx.github.io/">随便写写</a></span> · 
 
     <span>
         Powered by

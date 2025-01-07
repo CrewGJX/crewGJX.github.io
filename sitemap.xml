@@ -2,16 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://crewgjx.github.io/pages/</loc>
-    <lastmod>2024-11-21T14:53:44+08:00</lastmod>
-  </url><url>
-    <loc>http://crewgjx.github.io/</loc>
-    <lastmod>2024-11-21T14:53:44+08:00</lastmod>
-  </url><url>
     <loc>http://crewgjx.github.io/pages/data-dog/</loc>
+  </url><url>
+    <loc>http://crewgjx.github.io/pages/nginx/nginx%E4%BB%A3%E7%90%86udp/</loc>
   </url><url>
     <loc>http://crewgjx.github.io/categories/</loc>
   </url><url>
+    <loc>http://crewgjx.github.io/pages/</loc>
+  </url><url>
     <loc>http://crewgjx.github.io/tags/</loc>
+  </url><url>
+    <loc>http://crewgjx.github.io/</loc>
   </url>
 </urlset>
